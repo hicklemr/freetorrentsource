@@ -1,6 +1,7 @@
 #labels upgade,tutorial,1.1,to1.2,beta,Featured
 =====How to upgrade from 1.1 Stable to 1.2 Beta=====
 =====It's easy. Just delete all files from server except torrents folder and config folder. Make a copy of secrets.php or DO NOT DELETE FROM THE SERVER. Now go to phpmyadmin and delete the sysoppanel table and after that run this code:=====
+{{{
 CREATE TABLE `sysoppanel` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `name` varchar(50) default NULL,
@@ -67,5 +68,5 @@ ALTER TABLE `users` ADD `vip_added` enum('yes','no') NOT NULL default 'no';
 ALTER TABLE `users` ADD `vip_until` datetime NOT NULL default '0000-00-00 00:00:00';
 ALTER TABLE `users` ADD `seedbonus` decimal(10,1) NOT NULL default '0.0';
 ALTER TABLE `users` ADD `bonuscomment` text NOT NULL;
-
+}}}
 =====Now you are ready to use the source. If you still have problems,contact me at: filip.pacurar@gmail.com . Good luck.=====
