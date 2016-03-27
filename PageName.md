@@ -1,0 +1,71 @@
+##### How to upgrade from 1.1 Stable to 1.2 Beta #####
+##### It's easy. Just delete all files from server except torrents folder and config folder. Make a copy of secrets.php or DO NOT DELETE FROM THE SERVER. Now go to phpmyadmin and delete the sysoppanel table and after that run this code: #####
+```
+CREATE TABLE `sysoppanel` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `name` varchar(50) default NULL,
+  `url` varchar(200) default NULL,
+  `info` varchar(100) default NULL,
+  `min_class` text NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5560 ;
+
+-- 
+-- Dumping data for table `sysoppanel`
+-- 
+
+INSERT INTO `sysoppanel` (`id`, `name`, `url`, `info`, `min_class`) VALUES 
+(3001, 'Delete user', 'admin.php?act=delacctadmin', 'Delete user without confirm', '6'),
+(3003, 'Mass mailer', 'admin.php?act=massmail', 'Send mail to all tracker users', '6'),
+(3005, 'My_Sql stats', 'admin.php?act=mysql_stats', 'See your MySql stats', '6'),
+(3006, 'Manage tracker categories', 'admin.php?act=category', 'Manage your tracker torrent caregoties', '6'),
+(3008, 'Rest lost passwords', 'admin.php?act=reset', 'Script that resets user password', '6'),
+(3009, 'Edit forum', 'admin.php?act=editforums', 'Edit your forum', '6'),
+(3010, 'PHP info', 'admin.php?act=phpnfo', 'Check your PHP status', '6'),
+(3012, 'Do Cleanup', 'admin.php?act=docleanup', 'Do cleanup function', '6'),
+(3013, 'Optimize DB', 'admin.php?act=optimize', 'This script will optimize your DB', '6'),
+(3014, 'Mass Pm', 'admin.php?act=masspm', 'This script will send a pass pm', '6'),
+(2002, 'Add user', 'admin.php?act=adduser', 'Add user', '5'),
+(2003, 'Unconfirmed users', 'admin.php?act=uncon', 'View unconfirmed accounts', '5'),
+(2004, 'Announcement', 'admin.php?act=announcement', 'Public important message for all tracker users', '5'),
+(2005, 'Traceroute', 'admin.php?act=traceroute', 'Trace IP', '5'),
+(2006, 'FAQ management', 'admin.php?act=faqmanage', 'Manage your FAQ page', '5'),
+(2007, 'Rules  management', 'admin.php?act=modrules', 'Manage your Rules page', '5'),
+(1001, 'Warned users', 'admin.php?act=warned', 'See warned users', '4'),
+(1002, 'Poll overview', 'admin.php?act=polls', 'View polls', '4'),
+(1003, 'Make poll', 'admin.php?act=makepoll', 'Create new poll', '4'),
+(1004, 'User list', 'users.php', 'View users', '4'),
+(1005, 'Stats', 'admin.php?act=stats', 'Tracker stats', '4'),
+(1006, 'Test IP', 'admin.php?act=testip', 'Test single IP', '4'),
+(1007, 'Duplicate IP', 'admin.php?act=ipcheck', 'Duplicate IP users', '4'),
+(1008, 'Leechers', 'admin.php?act=leechers', 'Show users with ratio under 0.40', '4'),
+(1009, 'IP ban', 'admin.php?act=bans', 'Ban single IP', '4'),
+(1011, 'Check script', 'admin.php?act=proxy', 'Possable proxy server user check script', '4'),
+(1012, 'Uploaders', 'admin.php?act=uploaders', 'See your uploaders info', '4'),
+(1013, 'Ratio cheaters', 'admin.php?act=cheaters', 'Check if someone is cheating on tracker', '4');
+CREATE TABLE `bonus` (
+  `id` int(5) NOT NULL auto_increment,
+  `bonusname` varchar(50) NOT NULL default '',
+  `points` decimal(10,1) NOT NULL default '0.0',
+  `description` text NOT NULL,
+  `art` varchar(10) NOT NULL default 'traffic',
+  `menge` bigint(20) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`id`)
+);
+
+
+
+INSERT INTO `bonus` VALUES (1, '1.0GB Uploaded', '75.0', 'With enough bonus points acquired, you are able to exchange them for an Upload Credit. The points are then removed from your Bonus Bank and the credit is added to your total uploaded amount.', 'traffic', 1073741824);
+INSERT INTO `bonus` VALUES (2, '2.5GB Uploaded', '150.0', 'With enough bonus points acquired, you are able to exchange them for an Upload Credit. The points are then removed from your Bonus Bank and the credit is added to your total uploaded amount.', 'traffic', 2684354560);
+INSERT INTO `bonus` VALUES (3, '5GB Uploaded', '250.0', 'With enough bonus points acquired, you are able to exchange them for an Upload Credit. The points are then removed from your Bonus Bank and the credit is added to your total uploaded amount.', 'traffic', 5368709120);
+INSERT INTO `bonus` VALUES (4, '3 Invites', '20.0', 'With enough bonus points acquired, you are able to exchange them for a few invites. The points are then removed from your Bonus Bank and the invitations are added to your invites amount.', 'invite', 3);
+INSERT INTO `bonus` VALUES (5, 'Custom Title!', '50.0', 'For only 50.0 Karma Bonus Points you can buy yourself a custom title. the only restrictions are no foul or offensive language or userclass can be entered. The points are then removed from your Bonus Bank and your special title is changed to the title of your choice', 'title', 1);
+INSERT INTO `bonus` VALUES (6, 'VIP Status', '500.0', 'With enough bonus points acquired, you can buy yourself VIP status for one month. The points are then removed from your Bonus Bank and your status is changed.', 'class', 1);
+INSERT INTO `bonus` VALUES (7, 'Give A Karma Gift', '100.0', 'Well perhaps you don\'t need the upload credit, but you know somebody that could use the Karma boost! You are now able to give your Karma credits as  a gift! The points are then removed from your Bonus Bank and  added to the account of a user of your choice!\r\n\r\nAnd they recieve a PM with all the info as well as who it came from...', 'gift_1', 1073741824);
+
+ALTER TABLE `users` ADD `vip_added` enum('yes','no') NOT NULL default 'no';
+ALTER TABLE `users` ADD `vip_until` datetime NOT NULL default '0000-00-00 00:00:00';
+ALTER TABLE `users` ADD `seedbonus` decimal(10,1) NOT NULL default '0.0';
+ALTER TABLE `users` ADD `bonuscomment` text NOT NULL;
+```
+##### Now you are ready to use the source. If you still have problems,contact me at: filip.pacurar@gmail.com . Good luck. #####
